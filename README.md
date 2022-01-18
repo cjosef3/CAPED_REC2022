@@ -3,6 +3,7 @@ CAPED's code for the REC 2022 competion
 
 ## Team Members
 Alex Johnson
+Ryan Anderson
 
 ## Stages of the Vehicle
 
