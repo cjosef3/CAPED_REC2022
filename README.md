@@ -9,7 +9,7 @@ Ryan Anderson
 
 ### Load/Unload Queue
 	Ladder Logic by Alex
-Description here...
+Description here:
 
 ### Rising Tower to Drop Tower
 	Ladder Logic by Ryan
