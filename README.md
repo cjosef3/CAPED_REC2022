@@ -3,7 +3,7 @@ CAPED's code for the REC 2022 competion
 
 ## Team Members
 Alex Johnson
-Ryan Anderson
+Christopher Ng
 
 ## Stages of the Vehicle
 
@@ -14,3 +14,7 @@ Description here:
 ### Rising Tower to Drop Tower
 	Ladder Logic by Ryan
 Description here:
+
+### Drop to Actuation
+	Ladder Logic by Chris
+Description here...
