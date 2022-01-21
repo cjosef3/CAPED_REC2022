@@ -6,6 +6,7 @@ VS Code is the team's IDE of choice
 ## Team Members
 Alex Johnson
 Christopher Ng
+Isabelle Utsler
 
 ## Stages of the Vehicle
 
@@ -20,3 +21,7 @@ Description here:
 ### Drop to Actuation
 	Ladder Logic by Chris
 Description here...
+
+### Actuation to Wait
+	Ladder Logic by Isabelle
+Description here: 
