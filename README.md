@@ -7,6 +7,7 @@ VS Code is the team's IDE of choice
 Alex Johnson
 Christopher Ng
 Isabelle Utsler
+Ryan Anderson
 
 ## Stages of the Vehicle
 
