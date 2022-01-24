@@ -8,6 +8,7 @@ Alex Johnson
 Christopher Ng
 Isabelle Utsler
 Ryan Anderson
+Kyle McGrath
 
 ## Stages of the Vehicle
 
