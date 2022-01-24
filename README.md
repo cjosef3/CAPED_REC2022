@@ -9,11 +9,16 @@ Christopher Ng
 Isabelle Utsler
 Ryan Anderson
 Kyle McGrath
+Carter Josef
 
 ## Stages of the Vehicle
 
 ### Load/Unload Queue
 	Ladder Logic by Alex
+Description here:
+
+### Wait to Rising Tower
+	Ladder Logic by Carter
 Description here:
 
 ### Rising Tower to Drop Tower
