@@ -1,14 +1,12 @@
 # CAPED_REC2022
 CAPED's code for the REC 2022 competion
 
-VS Code is the team's IDE of choice
+STM32CubeIDE is the team's IDE of choice
 
 ## Team Members
 Alex Johnson
 Christopher Ng
-Isabelle Utsler
 Ryan Anderson
-Kyle McGrath
 Carter Josef
 
 ## Stages of the Vehicle
@@ -30,8 +28,6 @@ Description here:
 Description here...
 
 ### Actuation to Wait
-	Ladder Logic by Isabelle
-Description here
 
 ### Additional Support
 	Additional Ladder Logic by Christian
