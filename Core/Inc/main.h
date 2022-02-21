@@ -107,6 +107,8 @@ void Error_Handler(void);
 #define RIDESTOP_GPIO_Port GPIOA
 #define ESTOP_Pin GPIO_PIN_10
 #define ESTOP_GPIO_Port GPIOA
+#define Limit5_Pin GPIO_PIN_11
+#define Limit5_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
@@ -123,10 +125,18 @@ void Error_Handler(void);
 #define Stepper1_step_GPIO_Port GPIOD
 #define Stepper1_EN_Pin GPIO_PIN_3
 #define Stepper1_EN_GPIO_Port GPIOB
+#define IR11_Pin GPIO_PIN_4
+#define IR11_GPIO_Port GPIOB
+#define IR10_Pin GPIO_PIN_5
+#define IR10_GPIO_Port GPIOB
 #define TOF_SCL_Pin GPIO_PIN_6
 #define TOF_SCL_GPIO_Port GPIOB
 #define TOF_SDA_Pin GPIO_PIN_7
 #define TOF_SDA_GPIO_Port GPIOB
+#define IR9_Pin GPIO_PIN_8
+#define IR9_GPIO_Port GPIOB
+#define IR8_Pin GPIO_PIN_9
+#define IR8_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

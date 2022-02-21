@@ -83,9 +83,9 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PAPin PAPin PAPin PAPin
-                           PAPin */
+                           PAPin PAPin */
   GPIO_InitStruct.Pin = IR1_Pin|IR2_Pin|Override1_Pin|RIDESTOP_Pin
-                          |ESTOP_Pin;
+                          |ESTOP_Pin|Limit5_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -99,9 +99,11 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PBPin PBPin PBPin PBPin
+                           PBPin PBPin PBPin PBPin
                            PBPin PBPin PBPin */
   GPIO_InitStruct.Pin = IR5_Pin|IR6_Pin|IR7_Pin|Limit4_Pin
-                          |Limit3_Pin|Limit2_Pin|Limit1_Pin;
+                          |Limit3_Pin|Limit2_Pin|Limit1_Pin|IR11_Pin
+                          |IR10_Pin|IR9_Pin|IR8_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
