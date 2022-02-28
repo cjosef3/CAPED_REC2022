@@ -44,6 +44,7 @@ UART_HandleTypeDef huart2;
 
 osThreadId defaultTaskHandle;
 osThreadId myTask02Handle;
+osThreadId TowerTransitionHandle;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -54,6 +55,7 @@ static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 void StartDefaultTask(void const * argument);
 void StartTask02(void const * argument);
+void StartTowerTransition(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -119,8 +121,12 @@ int main(void)
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of myTask02 */
-  osThreadDef(myTask02, StartTask02, osPriorityIdle, 0, 128);
+  osThreadDef(myTask02, StartTask02, osPriorityNormal, 0, 128);
   myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
+
+  /* definition and creation of TowerTransition */
+  osThreadDef(TowerTransition, StartTowerTransition, osPriorityIdle, 0, 128);
+  TowerTransitionHandle = osThreadCreate(osThread(TowerTransition), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -237,9 +243,21 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, Servo_SCL_Pin|Servo_SDA_Pin|Servo_Enable_Pin|Override5_Pin
+                          |Override4_Pin|STEPPER2_STI_Pin|STEPPER2_EN_Pin|STEPPER1_DIR_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, LD2_Pin|Override3_Pin|Override2_Pin|Override1_Pin
+                          |RIDESTOP_Pin|ESTOP_Pin|STEPPER2_DIR_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(STEPPER1_STI_GPIO_Port, STEPPER1_STI_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(STEPPER1_EN_GPIO_Port, STEPPER1_EN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -247,12 +265,61 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LD2_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin;
+  /*Configure GPIO pins : Servo_SCL_Pin Servo_SDA_Pin Servo_Enable_Pin Override5_Pin
+                           Override4_Pin STEPPER2_STI_Pin STEPPER2_EN_Pin STEPPER1_DIR_Pin */
+  GPIO_InitStruct.Pin = Servo_SCL_Pin|Servo_SDA_Pin|Servo_Enable_Pin|Override5_Pin
+                          |Override4_Pin|STEPPER2_STI_Pin|STEPPER2_EN_Pin|STEPPER1_DIR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : LD2_Pin Override3_Pin Override2_Pin Override1_Pin
+                           RIDESTOP_Pin ESTOP_Pin STEPPER2_DIR_Pin */
+  GPIO_InitStruct.Pin = LD2_Pin|Override3_Pin|Override2_Pin|Override1_Pin
+                          |RIDESTOP_Pin|ESTOP_Pin|STEPPER2_DIR_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : IR1_Pin IR2_Pin */
+  GPIO_InitStruct.Pin = IR1_Pin|IR2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : IR3_Pin IR4_Pin Limit2_Pin Limit1_Pin */
+  GPIO_InitStruct.Pin = IR3_Pin|IR4_Pin|Limit2_Pin|Limit1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : IR5_Pin IR6_Pin IR7_Pin ACC_SCL_Pin
+                           ACC_SDA_Pin Limit6_Pin Limit5_Pin Limit4_Pin
+                           Limit3_Pin IR11_Pin IR10_Pin TOF_SCL_Pin
+                           TOF_SDA_Pin IR9_Pin IR8_Pin */
+  GPIO_InitStruct.Pin = IR5_Pin|IR6_Pin|IR7_Pin|ACC_SCL_Pin
+                          |ACC_SDA_Pin|Limit6_Pin|Limit5_Pin|Limit4_Pin
+                          |Limit3_Pin|IR11_Pin|IR10_Pin|TOF_SCL_Pin
+                          |TOF_SDA_Pin|IR9_Pin|IR8_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : STEPPER1_STI_Pin */
+  GPIO_InitStruct.Pin = STEPPER1_STI_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(STEPPER1_STI_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : STEPPER1_EN_Pin */
+  GPIO_InitStruct.Pin = STEPPER1_EN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(STEPPER1_EN_GPIO_Port, &GPIO_InitStruct);
 
 }
 
@@ -294,6 +361,38 @@ void StartTask02(void const * argument)
     osDelay(1);
   }
   /* USER CODE END StartTask02 */
+}
+
+/* USER CODE BEGIN Header_StartTowerTransition */
+/**
+* @brief Function implementing the TowerTransition thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTowerTransition */
+void StartTowerTransition(void const * argument)
+{
+  /* USER CODE BEGIN StartTowerTransition */
+  /* Infinite loop */
+  for(;;)
+  {
+	/* If:
+	 * - The LIFT tower top IR receiver is triggered by the cabin IR emitter (IR4 - PC5) AND
+	 * - The top LIFT tower limit switch is activated (Limit1 - PC7) AND
+	 * - The DROP tower top IR receiver is triggered by the cabin IR emitter (IR5 - PB0) AND
+	 * - The top DROP tower limit switches is activated (Limit2 - PC6)
+	 */
+	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6)) {
+		// First, unlock the cabin servo holding the RV (Servo_Enable - PC2)
+		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);
+
+		// Wait a 1/2 second for the servo to unlock, then drive the stepper motor (STEPPER1_EN - PB3)
+		HAL_Delay(500);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
+	}
+    osDelay(1);
+  }
+  /* USER CODE END StartTowerTransition */
 }
 
 /**
