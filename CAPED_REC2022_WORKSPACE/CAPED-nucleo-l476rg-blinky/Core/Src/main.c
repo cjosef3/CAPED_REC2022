@@ -40,11 +40,14 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c1;
+I2C_HandleTypeDef hi2c2;
+I2C_HandleTypeDef hi2c3;
+
 UART_HandleTypeDef huart2;
 
 osThreadId defaultTaskHandle;
 osThreadId myTask02Handle;
-osThreadId TowerTransitionHandle;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -53,9 +56,11 @@ osThreadId TowerTransitionHandle;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
+static void MX_I2C1_Init(void);
+static void MX_I2C2_Init(void);
+static void MX_I2C3_Init(void);
 void StartDefaultTask(void const * argument);
 void StartTask02(void const * argument);
-void StartTowerTransition(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -95,6 +100,9 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  MX_I2C1_Init();
+  MX_I2C2_Init();
+  MX_I2C3_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -121,10 +129,10 @@ int main(void)
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of myTask02 */
-  osThreadDef(myTask02, StartTask02, osPriorityNormal, 0, 128);
+  osThreadDef(myTask02, StartTask02, osPriorityIdle, 0, 128);
   myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
-
-  /* definition and creation of TowerTransition */
+  
+   /* definition and creation of TowerTransition */
   osThreadDef(TowerTransition, StartTowerTransition, osPriorityIdle, 0, 128);
   TowerTransitionHandle = osThreadCreate(osThread(TowerTransition), NULL);
 
@@ -195,6 +203,144 @@ void SystemClock_Config(void)
 }
 
 /**
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C1_Init(void)
+{
+
+  /* USER CODE BEGIN I2C1_Init 0 */
+
+  /* USER CODE END I2C1_Init 0 */
+
+  /* USER CODE BEGIN I2C1_Init 1 */
+
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.Timing = 0x10909CEC;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C1_Init 2 */
+
+  /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief I2C2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C2_Init(void)
+{
+
+  /* USER CODE BEGIN I2C2_Init 0 */
+
+  /* USER CODE END I2C2_Init 0 */
+
+  /* USER CODE BEGIN I2C2_Init 1 */
+
+  /* USER CODE END I2C2_Init 1 */
+  hi2c2.Instance = I2C2;
+  hi2c2.Init.Timing = 0x10909CEC;
+  hi2c2.Init.OwnAddress1 = 0;
+  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c2.Init.OwnAddress2 = 0;
+  hi2c2.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c2, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c2, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C2_Init 2 */
+
+  /* USER CODE END I2C2_Init 2 */
+
+}
+
+/**
+  * @brief I2C3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C3_Init(void)
+{
+
+  /* USER CODE BEGIN I2C3_Init 0 */
+
+  /* USER CODE END I2C3_Init 0 */
+
+  /* USER CODE BEGIN I2C3_Init 1 */
+
+  /* USER CODE END I2C3_Init 1 */
+  hi2c3.Instance = I2C3;
+  hi2c3.Init.Timing = 0x10909CEC;
+  hi2c3.Init.OwnAddress1 = 0;
+  hi2c3.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c3.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c3.Init.OwnAddress2 = 0;
+  hi2c3.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c3.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c3.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c3, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c3, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C3_Init 2 */
+
+  /* USER CODE END I2C3_Init 2 */
+
+}
+
+/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
@@ -246,18 +392,16 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, Servo_SCL_Pin|Servo_SDA_Pin|Servo_Enable_Pin|Override5_Pin
-                          |Override4_Pin|STEPPER2_STI_Pin|STEPPER2_EN_Pin|STEPPER1_DIR_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, Servo_EN_Pin|Step2_step_Pin|Step2_en_Pin|Step1_dir_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LD2_Pin|Override3_Pin|Override2_Pin|Override1_Pin
-                          |RIDESTOP_Pin|ESTOP_Pin|STEPPER2_DIR_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LD2_Pin|Step2_dir_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(STEPPER1_STI_GPIO_Port, STEPPER1_STI_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Step1_step_GPIO_Port, Step1_step_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(STEPPER1_EN_GPIO_Port, STEPPER1_EN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(Step1_en_GPIO_Port, Step1_en_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -265,61 +409,59 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Servo_SCL_Pin Servo_SDA_Pin Servo_Enable_Pin Override5_Pin
-                           Override4_Pin STEPPER2_STI_Pin STEPPER2_EN_Pin STEPPER1_DIR_Pin */
-  GPIO_InitStruct.Pin = Servo_SCL_Pin|Servo_SDA_Pin|Servo_Enable_Pin|Override5_Pin
-                          |Override4_Pin|STEPPER2_STI_Pin|STEPPER2_EN_Pin|STEPPER1_DIR_Pin;
+  /*Configure GPIO pins : Servo_EN_Pin Step2_step_Pin Step2_en_Pin Step1_dir_Pin */
+  GPIO_InitStruct.Pin = Servo_EN_Pin|Step2_step_Pin|Step2_en_Pin|Step1_dir_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LD2_Pin Override3_Pin Override2_Pin Override1_Pin
-                           RIDESTOP_Pin ESTOP_Pin STEPPER2_DIR_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin|Override3_Pin|Override2_Pin|Override1_Pin
-                          |RIDESTOP_Pin|ESTOP_Pin|STEPPER2_DIR_Pin;
+  /*Configure GPIO pins : LD2_Pin Step2_dir_Pin */
+  GPIO_InitStruct.Pin = LD2_Pin|Step2_dir_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : IR1_Pin IR2_Pin */
-  GPIO_InitStruct.Pin = IR1_Pin|IR2_Pin;
+  /*Configure GPIO pins : IR1_Pin IR2_Pin Override3_Pin Override2_Pin
+                           Override1_Pin RIDESTOP_Pin ESTOP_Pin */
+  GPIO_InitStruct.Pin = IR1_Pin|IR2_Pin|Override3_Pin|Override2_Pin
+                          |Override1_Pin|RIDESTOP_Pin|ESTOP_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : IR3_Pin IR4_Pin Limit2_Pin Limit1_Pin */
-  GPIO_InitStruct.Pin = IR3_Pin|IR4_Pin|Limit2_Pin|Limit1_Pin;
+  /*Configure GPIO pins : IR3_Pin IR4_Pin Limit2_Pin Limit1_Pin
+                           Override5_Pin Override4_Pin */
+  GPIO_InitStruct.Pin = IR3_Pin|IR4_Pin|Limit2_Pin|Limit1_Pin
+                          |Override5_Pin|Override4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : IR5_Pin IR6_Pin IR7_Pin ACC_SCL_Pin
-                           ACC_SDA_Pin Limit6_Pin Limit5_Pin Limit4_Pin
-                           Limit3_Pin IR11_Pin IR10_Pin TOF_SCL_Pin
-                           TOF_SDA_Pin IR9_Pin IR8_Pin */
-  GPIO_InitStruct.Pin = IR5_Pin|IR6_Pin|IR7_Pin|ACC_SCL_Pin
-                          |ACC_SDA_Pin|Limit6_Pin|Limit5_Pin|Limit4_Pin
-                          |Limit3_Pin|IR11_Pin|IR10_Pin|TOF_SCL_Pin
-                          |TOF_SDA_Pin|IR9_Pin|IR8_Pin;
+  /*Configure GPIO pins : IR5_Pin IR6_Pin IR7_Pin Limit6_Pin
+                           Limit5_Pin Limit4_Pin Limit3_Pin IR11_Pin
+                           IR10_Pin IR9_Pin IR8_Pin */
+  GPIO_InitStruct.Pin = IR5_Pin|IR6_Pin|IR7_Pin|Limit6_Pin
+                          |Limit5_Pin|Limit4_Pin|Limit3_Pin|IR11_Pin
+                          |IR10_Pin|IR9_Pin|IR8_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : STEPPER1_STI_Pin */
-  GPIO_InitStruct.Pin = STEPPER1_STI_Pin;
+  /*Configure GPIO pin : Step1_step_Pin */
+  GPIO_InitStruct.Pin = Step1_step_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(STEPPER1_STI_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(Step1_step_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : STEPPER1_EN_Pin */
-  GPIO_InitStruct.Pin = STEPPER1_EN_Pin;
+  /*Configure GPIO pin : Step1_en_Pin */
+  GPIO_InitStruct.Pin = Step1_en_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(STEPPER1_EN_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(Step1_en_GPIO_Port, &GPIO_InitStruct);
 
 }
 
@@ -385,6 +527,8 @@ void StartTowerTransition(void const * argument)
 	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6)) {
 		// First, unlock the cabin servo holding the RV (Servo_Enable - PC2)
 		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);
+    
+    //TODO: I2C communication to mapped servo.
 
 		// Wait a 1/2 second for the servo to unlock, then drive the stepper motor (STEPPER1_EN - PB3)
 		HAL_Delay(500);
@@ -394,6 +538,7 @@ void StartTowerTransition(void const * argument)
   }
   /* USER CODE END StartTowerTransition */
 }
+
 
 /**
   * @brief  Period elapsed callback in non blocking mode
