@@ -133,7 +133,7 @@ int main(void)
   myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
   
    /* definition and creation of TowerTransition */
-  osThreadDef(TowerTransition, StartTowerTransition, osPriorityIdle, 0, 128);
+  osThreadDef(TowerTransition, StartTowerTransition, osPriorityNormal, 0, 128);
   TowerTransitionHandle = osThreadCreate(osThread(TowerTransition), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
