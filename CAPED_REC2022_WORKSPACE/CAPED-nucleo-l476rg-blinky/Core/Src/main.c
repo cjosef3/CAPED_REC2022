@@ -48,6 +48,7 @@ UART_HandleTypeDef huart2;
 
 osThreadId defaultTaskHandle;
 osThreadId myTask02Handle;
+osThreadId TowerTransitionHandle;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -61,6 +62,7 @@ static void MX_I2C2_Init(void);
 static void MX_I2C3_Init(void);
 void StartDefaultTask(void const * argument);
 void StartTask02(void const * argument);
+void StartTowerTransition(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -131,6 +133,10 @@ int main(void)
   /* definition and creation of myTask02 */
   osThreadDef(myTask02, StartTask02, osPriorityIdle, 0, 128);
   myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
+  
+   /* definition and creation of TowerTransition */
+  osThreadDef(TowerTransition, StartTowerTransition, osPriorityNormal, 0, 128);
+  TowerTransitionHandle = osThreadCreate(osThread(TowerTransition), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -500,6 +506,41 @@ void StartTask02(void const * argument)
   }
   /* USER CODE END StartTask02 */
 }
+
+/* USER CODE BEGIN Header_StartTowerTransition */
+/**
+* @brief Function implementing the TowerTransition thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTowerTransition */
+void StartTowerTransition(void const * argument)
+{
+  /* USER CODE BEGIN StartTowerTransition */
+  /* Infinite loop */
+  for(;;)
+  {
+	/* If:
+	 * - The LIFT tower top IR receiver is triggered by the cabin IR emitter (IR4 - PC5) AND
+	 * - The top LIFT tower limit switch is activated (Limit1 - PC7) AND
+	 * - The DROP tower top IR receiver is triggered by the cabin IR emitter (IR5 - PB0) AND
+	 * - The top DROP tower limit switches is activated (Limit2 - PC6)
+	 */
+	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6)) {
+		// First, unlock the cabin servo holding the RV (Servo_Enable - PC2)
+		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);
+    
+    //TODO: I2C communication to mapped servo.
+
+		// Wait a 1/2 second for the servo to unlock, then drive the stepper motor (STEPPER1_EN - PB3)
+		HAL_Delay(500);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
+	}
+    osDelay(1);
+  }
+  /* USER CODE END StartTowerTransition */
+}
+
 
 /**
   * @brief  Period elapsed callback in non blocking mode
