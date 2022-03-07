@@ -98,7 +98,23 @@ void StartActuationDrop(void *argument);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void unlockCabinServo(int i){
+	if(i == 1){
+		//TODO move mapped servo for lift tower
+	}
+	else{
+		//TODO move mapped servo for drop tower
+	}
+}
 
+void lockCabinServo(int i){
+	if(i == 1){
+		//TODO move mapped servo for lift tower
+	}
+	else{
+		//TODO move mapped servo for drop tower
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -546,6 +562,8 @@ void StartTowerTransition(void *argument)
 	  	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6)) {
 	  		// First, unlock the cabin servo holding the RV
 
+	  		unlockCabinServo(1);
+
 	        //TODO: I2C communication to mapped servo.
 
 	  		// Wait a 1/2 second for the servo to unlock, then drive the stepper motor (STEPPER1_EN - PB3)
@@ -588,6 +606,7 @@ void StartQueueToTop(void *argument)
 			 //TODO set brakes based on TOF
 
 			 //TODO drive lock servo
+			 lockCabinServo(1);
 
 			 // Wait a 1/2 second for the servo to unlock, then drive the stepper motor (STEPPER2_EN)
 			 osDelay(500);
