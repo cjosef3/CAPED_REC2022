@@ -2180,3 +2180,98 @@
 2022-03-06 20:13:37,675 [INFO] ProjectBuilder:3832 - Time for Generating toolchain IDE Files: 2398mS.
 2022-03-06 20:13:37,675 [INFO] ProjectBuilder:2461 - Time for Copy CMSIS : 0mS.
 2022-03-06 20:13:37,678 [INFO] ProjectBuilder:2461 - Time for Copy CMSIS : 0mS.
+2022-03-07 10:23:39,604 [INFO] EditThreadDialog:699 - RAM SIZE (in KB): 128
+2022-03-07 10:23:39,607 [INFO] EditThreadDialog:701 - RAM SIZE (in words): 32768
+2022-03-07 10:25:49,064 [INFO] TasksAndQueuesTab:752 - Dynamic
+2022-03-07 10:25:49,064 [WARN] TasksAndQueuesTab:758 - 128 128
+2022-03-07 10:25:49,064 [WARN] TasksAndQueuesTab:770 - max value is: 750.0
+2022-03-07 10:25:49,065 [INFO] TasksAndQueuesTab:752 - Dynamic
+2022-03-07 10:25:49,065 [WARN] TasksAndQueuesTab:758 - 128 128
+2022-03-07 10:25:49,065 [WARN] TasksAndQueuesTab:770 - max value is: 750.0
+2022-03-07 10:25:49,065 [INFO] TasksAndQueuesTab:752 - Dynamic
+2022-03-07 10:25:49,065 [WARN] TasksAndQueuesTab:758 - 128 128
+2022-03-07 10:25:49,065 [WARN] TasksAndQueuesTab:770 - max value is: 750.0
+2022-03-07 10:25:49,065 [INFO] TasksAndQueuesTab:752 - Dynamic
+2022-03-07 10:25:49,065 [WARN] TasksAndQueuesTab:758 - 128 128
+2022-03-07 10:25:49,065 [WARN] TasksAndQueuesTab:770 - max value is: 750.0
+2022-03-07 10:26:49,064 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 406195712 Bytes (918552576)
+2022-03-07 10:26:52,525 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 430312960 Bytes (918552576)
+2022-03-07 10:26:56,674 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 337324320 Bytes (918552576)
+2022-03-07 10:26:57,097 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: FREERTOS
+2022-03-07 10:26:57,098 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: SYS
+2022-03-07 10:26:57,098 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: RCC
+2022-03-07 10:26:57,098 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: I2C
+2022-03-07 10:26:57,109 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: I2C
+2022-03-07 10:26:57,109 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: I2C
+2022-03-07 10:26:57,109 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: NVIC
+2022-03-07 10:26:57,109 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: USART
+2022-03-07 10:26:57,110 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: GPIO
+2022-03-07 10:26:57,111 [INFO] CodeGenerator:663 - code generatio: config db path: /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.common.mx_6.4.0.202111222105//db/
+2022-03-07 10:26:57,469 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/license.tmp_save
+2022-03-07 10:26:57,512 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/license.tmp
+2022-03-07 10:26:57,649 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/gpio.tmp_save
+2022-03-07 10:26:57,703 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/gpio.tmp
+2022-03-07 10:26:58,836 [INFO] Middleware:1388 - No code input for Bsp Dependency
+2022-03-07 10:26:58,840 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_inc.tmp_save
+2022-03-07 10:26:58,885 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_inc.tmp
+2022-03-07 10:26:58,886 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_kernelInit.tmp_save
+2022-03-07 10:26:58,929 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_kernelInit.tmp
+2022-03-07 10:26:58,930 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_kernelStart.tmp_save
+2022-03-07 10:26:58,970 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_kernelStart.tmp
+2022-03-07 10:26:58,972 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_typedefs.tmp_save
+2022-03-07 10:26:59,011 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_typedefs.tmp
+2022-03-07 10:26:59,014 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_vars.tmp_save
+2022-03-07 10:26:59,055 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_vars.tmp
+2022-03-07 10:26:59,056 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_pfp.tmp_save
+2022-03-07 10:26:59,092 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_pfp.tmp
+2022-03-07 10:26:59,094 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_obj_creat.tmp_save
+2022-03-07 10:26:59,134 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_obj_creat.tmp
+2022-03-07 10:26:59,136 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_default_thread.tmp_save
+2022-03-07 10:26:59,229 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_default_thread.tmp
+2022-03-07 10:26:59,231 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_threads.tmp_save
+2022-03-07 10:26:59,288 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_threads.tmp
+2022-03-07 10:26:59,294 [INFO] Middleware:1388 - No code input for Bsp Dependency
+2022-03-07 10:26:59,298 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_inc.tmp_save
+2022-03-07 10:26:59,344 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_inc.tmp
+2022-03-07 10:26:59,346 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_kernelInit.tmp_save
+2022-03-07 10:26:59,387 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_kernelInit.tmp
+2022-03-07 10:26:59,389 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_kernelStart.tmp_save
+2022-03-07 10:26:59,430 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_kernelStart.tmp
+2022-03-07 10:26:59,435 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_typedefs.tmp_save
+2022-03-07 10:26:59,495 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_typedefs.tmp
+2022-03-07 10:26:59,497 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_vars.tmp_save
+2022-03-07 10:26:59,595 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_vars.tmp
+2022-03-07 10:26:59,596 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_pfp.tmp_save
+2022-03-07 10:26:59,635 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_pfp.tmp
+2022-03-07 10:26:59,637 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_obj_creat.tmp_save
+2022-03-07 10:26:59,681 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_obj_creat.tmp
+2022-03-07 10:26:59,682 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_default_thread.tmp_save
+2022-03-07 10:26:59,724 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_default_thread.tmp
+2022-03-07 10:26:59,726 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_threads.tmp_save
+2022-03-07 10:26:59,773 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/rtos_threads.tmp
+2022-03-07 10:26:59,775 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Inc/FreeRTOSConfig.h_save
+2022-03-07 10:26:59,833 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Inc/FreeRTOSConfig.h
+2022-03-07 10:26:59,835 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Src/freertos.c_save
+2022-03-07 10:26:59,877 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Src/freertos.c
+2022-03-07 10:26:59,886 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Src/stm32l4xx_it.c_save
+2022-03-07 10:26:59,940 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Src/stm32l4xx_it.c
+2022-03-07 10:26:59,943 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Inc/stm32l4xx_it.h_save
+2022-03-07 10:26:59,986 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Inc/stm32l4xx_it.h
+2022-03-07 10:26:59,994 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Src/stm32l4xx_hal_msp.c_save
+2022-03-07 10:27:00,083 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Src/stm32l4xx_hal_msp.c
+2022-03-07 10:27:00,085 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/system.tmp_save
+2022-03-07 10:27:00,125 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/MXTmpFiles/system.tmp
+2022-03-07 10:27:00,127 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Src/stm32l4xx_hal_timebase_tim.c_save
+2022-03-07 10:27:00,170 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Src/stm32l4xx_hal_timebase_tim.c
+2022-03-07 10:27:00,177 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Inc/stm32l4xx_hal_conf.h_save
+2022-03-07 10:27:00,230 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Inc/stm32l4xx_hal_conf.h
+2022-03-07 10:27:00,277 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Inc/main.h_save
+2022-03-07 10:27:00,326 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Inc/main.h
+2022-03-07 10:27:00,335 [INFO] CodeEngine:239 - oldGeneratedFile, /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Src/main.c_save
+2022-03-07 10:27:00,446 [INFO] CodeEngine:257 - Generated code: /Users/alexanderjohnson/Documents/Workspace/CAPED_REC2022/CAPED_REC2022_WORKSPACE/CAPED-nucleo-l476rg-blinky/Core/Src/main.c
+2022-03-07 10:27:01,719 [INFO] ProjectBuilder:2589 - Time for Copy HAL[1] : 594mS.
+2022-03-07 10:27:01,723 [INFO] ProjectBuilder:3665 - Project Generator version: 3.15.2
+2022-03-07 10:27:02,069 [INFO] ConfigFileManager:1273 - The Die is : DIE415
+2022-03-07 10:27:03,767 [INFO] ProjectBuilder:3832 - Time for Generating toolchain IDE Files: 2044mS.
+2022-03-07 10:27:03,768 [INFO] ProjectBuilder:2461 - Time for Copy CMSIS : 0mS.
+2022-03-07 10:27:03,771 [INFO] ProjectBuilder:2461 - Time for Copy CMSIS : 0mS.

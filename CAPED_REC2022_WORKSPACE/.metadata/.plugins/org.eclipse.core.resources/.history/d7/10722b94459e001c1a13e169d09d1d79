@@ -613,17 +613,7 @@ void StartActuationDrop(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	 //if drop complete, and at the top, amd wait clear
-    if(drop1Complete && HAL_GPIO_ReadPin(GPIOC, Limit4) && HAL_GPIO_ReadPin(GPIOC, IR11)){
-    	//TODO actuation servo
-
-    	//if actuated and still wait clear
-    	if(HAL_GPIO_ReadPin(GPIOC, Limit6) && HAL_GPIO_ReadPin(GPIOC, IR11)){
-    		//drop
-    		HAL_GPIO_WritePin(GPIOB, Step1_EN, GPIO_PIN_SET);
-    		drop1Complete = true;
-    	}
-    }
+    osDelay(1);
   }
   /* USER CODE END StartActuationDrop */
 }

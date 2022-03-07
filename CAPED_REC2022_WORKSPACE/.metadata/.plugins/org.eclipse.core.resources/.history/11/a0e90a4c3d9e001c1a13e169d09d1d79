@@ -46,8 +46,6 @@ I2C_HandleTypeDef hi2c3;
 
 UART_HandleTypeDef huart2;
 
-bool drop1Complete = false;
-
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
@@ -69,13 +67,6 @@ const osThreadAttr_t QueueToTop_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for ActuationDrop */
-osThreadId_t ActuationDropHandle;
-const osThreadAttr_t ActuationDrop_attributes = {
-  .name = "ActuationDrop",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -90,7 +81,6 @@ static void MX_I2C3_Init(void);
 void StartDefaultTask(void *argument);
 void StartTowerTransition(void *argument);
 void StartQueueToTop(void *argument);
-void StartActuationDrop(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -165,9 +155,6 @@ int main(void)
 
   /* creation of QueueToTop */
   QueueToTopHandle = osThreadNew(StartQueueToTop, NULL, &QueueToTop_attributes);
-
-  /* creation of ActuationDrop */
-  ActuationDropHandle = osThreadNew(StartActuationDrop, NULL, &ActuationDrop_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -589,7 +576,7 @@ void StartQueueToTop(void *argument)
 
 			 //TODO drive lock servo
 
-			 // Wait a 1/2 second for the servo to unlock, then drive the stepper motor (STEPPER2_EN)
+			 // Wait a 1/2 second for the servo to unlock, then drive the stepper motor (STEPPER1_EN - PB3)
 			 osDelay(500);
 			 HAL_GPIO_WritePin(GPIOB, Step2_EN, GPIO_PIN_SET);
 		 }
@@ -598,34 +585,6 @@ void StartQueueToTop(void *argument)
 
   }
   /* USER CODE END StartQueueToTop */
-}
-
-/* USER CODE BEGIN Header_StartActuationDrop */
-/**
-* @brief Function implementing the ActuationDrop thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_StartActuationDrop */
-void StartActuationDrop(void *argument)
-{
-  /* USER CODE BEGIN StartActuationDrop */
-  /* Infinite loop */
-  for(;;)
-  {
-	 //if drop complete, and at the top, amd wait clear
-    if(drop1Complete && HAL_GPIO_ReadPin(GPIOC, Limit4) && HAL_GPIO_ReadPin(GPIOC, IR11)){
-    	//TODO actuation servo
-
-    	//if actuated and still wait clear
-    	if(HAL_GPIO_ReadPin(GPIOC, Limit6) && HAL_GPIO_ReadPin(GPIOC, IR11)){
-    		//drop
-    		HAL_GPIO_WritePin(GPIOB, Step1_EN, GPIO_PIN_SET);
-    		drop1Complete = true;
-    	}
-    }
-  }
-  /* USER CODE END StartActuationDrop */
 }
 
 /**

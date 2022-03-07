@@ -1,7 +1,7 @@
 #MicroXplorer Configuration settings - do not modify
 FREERTOS.FootprintOK=true
 FREERTOS.IPParameters=Tasks01,configUSE_NEWLIB_REENTRANT,FootprintOK
-FREERTOS.Tasks01=defaultTask,24,128,StartDefaultTask,Default,NULL,Dynamic,NULL,NULL;TowerTransition,24,128,StartTowerTransition,Default,NULL,Dynamic,NULL,NULL;QueueToTop,24,128,StartQueueToTop,Default,NULL,Dynamic,NULL,NULL
+FREERTOS.Tasks01=defaultTask,24,128,StartDefaultTask,Default,NULL,Dynamic,NULL,NULL;TowerTransition,24,128,StartTowerTransition,Default,NULL,Dynamic,NULL,NULL;QueueToTop,24,128,StartQueueToTop,Default,NULL,Dynamic,NULL,NULL;ActuationDrop,24,128,StartActuationDrop,Default,NULL,Dynamic,NULL,NULL
 FREERTOS.configUSE_NEWLIB_REENTRANT=1
 File.Version=6
 I2C1.IPParameters=Timing
