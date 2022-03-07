@@ -46,9 +46,27 @@ I2C_HandleTypeDef hi2c3;
 
 UART_HandleTypeDef huart2;
 
-osThreadId defaultTaskHandle;
-osThreadId myTask02Handle;
-osThreadId TowerTransitionHandle;
+/* Definitions for defaultTask */
+osThreadId_t defaultTaskHandle;
+const osThreadAttr_t defaultTask_attributes = {
+  .name = "defaultTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for TowerTransition */
+osThreadId_t TowerTransitionHandle;
+const osThreadAttr_t TowerTransition_attributes = {
+  .name = "TowerTransition",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for QueueToTop */
+osThreadId_t QueueToTopHandle;
+const osThreadAttr_t QueueToTop_attributes = {
+  .name = "QueueToTop",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -60,9 +78,9 @@ static void MX_USART2_UART_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_I2C3_Init(void);
-void StartDefaultTask(void const * argument);
-void StartTask02(void const * argument);
-void StartTowerTransition(void const * argument);
+void StartDefaultTask(void *argument);
+void StartTowerTransition(void *argument);
+void StartQueueToTop(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -109,6 +127,9 @@ int main(void)
 
   /* USER CODE END 2 */
 
+  /* Init scheduler */
+  osKernelInitialize();
+
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
@@ -126,21 +147,22 @@ int main(void)
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
-  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+  /* creation of defaultTask */
+  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
-  /* definition and creation of myTask02 */
-  osThreadDef(myTask02, StartTask02, osPriorityIdle, 0, 128);
-  myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
-  
-   /* definition and creation of TowerTransition */
-  osThreadDef(TowerTransition, StartTowerTransition, osPriorityNormal, 0, 128);
-  TowerTransitionHandle = osThreadCreate(osThread(TowerTransition), NULL);
+  /* creation of TowerTransition */
+  TowerTransitionHandle = osThreadNew(StartTowerTransition, NULL, &TowerTransition_attributes);
+
+  /* creation of QueueToTop */
+  QueueToTopHandle = osThreadNew(StartQueueToTop, NULL, &QueueToTop_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
+
+  /* USER CODE BEGIN RTOS_EVENTS */
+  /* add events, ... */
+  /* USER CODE END RTOS_EVENTS */
 
   /* Start scheduler */
   osKernelStart();
@@ -478,7 +500,7 @@ static void MX_GPIO_Init(void)
   * @retval None
   */
 /* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void const * argument)
+void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
@@ -489,24 +511,6 @@ void StartDefaultTask(void const * argument)
   /* USER CODE END 5 */
 }
 
-/* USER CODE BEGIN Header_StartTask02 */
-/**
-* @brief Function implementing the myTask02 thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_StartTask02 */
-void StartTask02(void const * argument)
-{
-  /* USER CODE BEGIN StartTask02 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END StartTask02 */
-}
-
 /* USER CODE BEGIN Header_StartTowerTransition */
 /**
 * @brief Function implementing the TowerTransition thread.
@@ -514,33 +518,74 @@ void StartTask02(void const * argument)
 * @retval None
 */
 /* USER CODE END Header_StartTowerTransition */
-void StartTowerTransition(void const * argument)
+void StartTowerTransition(void *argument)
 {
   /* USER CODE BEGIN StartTowerTransition */
   /* Infinite loop */
   for(;;)
   {
-	/* If:
-	 * - The LIFT tower top IR receiver is triggered by the cabin IR emitter (IR4 - PC5) AND
-	 * - The top LIFT tower limit switch is activated (Limit1 - PC7) AND
-	 * - The DROP tower top IR receiver is triggered by the cabin IR emitter (IR5 - PB0) AND
-	 * - The top DROP tower limit switches is activated (Limit2 - PC6)
-	 */
-	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6)) {
-		// First, unlock the cabin servo holding the RV (Servo_Enable - PC2)
-		HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, GPIO_PIN_SET);
-    
-    //TODO: I2C communication to mapped servo.
+	  /* If:
+	  	 * - The LIFT tower top IR receiver is triggered by the cabin IR emitter (IR4 - PC5) AND
+	  	 * - The top LIFT tower limit switch is activated (Limit1 - PC7) AND
+	  	 * - The DROP tower top IR receiver is triggered by the cabin IR emitter (IR5 - PB0) AND
+	  	 * - The top DROP tower limit switches is activated (Limit2 - PC6)
+	  	 */
+	  	if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) && HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_6)) {
+	  		// First, unlock the cabin servo holding the RV
 
-		// Wait a 1/2 second for the servo to unlock, then drive the stepper motor (STEPPER1_EN - PB3)
-		HAL_Delay(500);
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
-	}
-    osDelay(1);
+	        //TODO: I2C communication to mapped servo.
+
+	  		// Wait a 1/2 second for the servo to unlock, then drive the stepper motor (STEPPER1_EN - PB3)
+	  		osDelay(500);
+	  		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
+	  	}
   }
   /* USER CODE END StartTowerTransition */
 }
 
+/* USER CODE BEGIN Header_StartQueueToTop */
+/**
+* @brief Function implementing the QueueToTop thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartQueueToTop */
+void StartQueueToTop(void *argument)
+{
+  /* USER CODE BEGIN StartQueueToTop */
+  /* Infinite loop */
+  for(;;)
+  {
+    /*
+     * Queue IR osDelay, input TOF, Cabin IR, bottom limit switch,
+     * outputs of drive motors and brakes into tower, servo to lock,
+     * and stepper, serial monitor
+     */
+
+	 //if something in queue
+	 if(HAL_GPIO_ReadPin(GPIOC, IR1)){
+
+		 //wait to load
+		 osDelay(10000);
+
+		 //if cabin at the bottom
+		 if(HAL_GPIO_ReadPin(GPIOC, IR2) && HAL_GPIO_ReadPin(GPIOC, IR3)){
+			 //TODO drive servos
+
+			 //TODO set brakes based on TOF
+
+			 //TODO drive lock servo
+
+			 // Wait a 1/2 second for the servo to unlock, then drive the stepper motor (STEPPER1_EN - PB3)
+			 osDelay(500);
+			 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET);
+		 }
+
+	 }
+
+  }
+  /* USER CODE END StartQueueToTop */
+}
 
 /**
   * @brief  Period elapsed callback in non blocking mode
