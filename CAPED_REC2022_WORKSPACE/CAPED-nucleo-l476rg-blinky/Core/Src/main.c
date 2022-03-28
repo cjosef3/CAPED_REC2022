@@ -46,8 +46,6 @@ I2C_HandleTypeDef hi2c3;
 
 UART_HandleTypeDef huart2;
 
-bool drop1Complete = false;
-
 /* Definitions for defaultTask */
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
@@ -76,6 +74,20 @@ const osThreadAttr_t ActuationDrop_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for WaitForQueue */
+osThreadId_t WaitForQueueHandle;
+const osThreadAttr_t WaitForQueue_attributes = {
+  .name = "WaitForQueue",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
+/* Definitions for DropTransition */
+osThreadId_t DropTransitionHandle;
+const osThreadAttr_t DropTransition_attributes = {
+  .name = "DropTransition",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -91,6 +103,8 @@ void StartDefaultTask(void *argument);
 void StartTowerTransition(void *argument);
 void StartQueueToTop(void *argument);
 void StartActuationDrop(void *argument);
+void StartWaitForQueue(void *argument);
+void StartDropTransition(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -184,6 +198,12 @@ int main(void)
 
   /* creation of ActuationDrop */
   ActuationDropHandle = osThreadNew(StartActuationDrop, NULL, &ActuationDrop_attributes);
+
+  /* creation of WaitForQueue */
+  WaitForQueueHandle = osThreadNew(StartWaitForQueue, NULL, &WaitForQueue_attributes);
+
+  /* creation of DropTransition */
+  DropTransitionHandle = osThreadNew(StartDropTransition, NULL, &DropTransition_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -645,6 +665,70 @@ void StartActuationDrop(void *argument)
     }
   }
   /* USER CODE END StartActuationDrop */
+}
+
+/* USER CODE BEGIN Header_StartWaitForQueue */
+/**
+* @brief Function implementing the WaitForQueue thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartWaitForQueue */
+void StartWaitForQueue(void *argument)
+{
+  /* USER CODE BEGIN StartWaitForQueue */
+  /* Infinite loop */
+  for(;;)
+  {
+	  /* For the Wait For Queue Task, we need to check:
+	   *  if the the pre-brake IR sensor is ON (IR8 - PB9)
+	   * Then, we need to:
+	   *  open the brakes ( TODO: Set Brake Servos )
+	   */
+	  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8)){
+		  // Unlock Servo that brakes/clamps onto the ride vehicle
+		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2,GPIO_PIN_SET);
+
+	//TODO: I2C communication to mapped servo.
+
+	  }
+	  osDelay(1);
+  }
+  /* USER CODE END StartWaitForQueue */
+}
+
+/* USER CODE BEGIN Header_StartDropTransition */
+/**
+* @brief Function implementing the DropTransition thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartDropTransition */
+void StartDropTransition(void *argument)
+{
+  /* USER CODE BEGIN StartDropTransition */
+  /* Infinite loop */
+  for(;;)
+  {
+	  /* For the Drop Transition Task, we need to check:
+	   *  if the two bottom limit switches are ON (Limit5 - PB13, Limit6 - PB12)
+	   *  if the IR sensor on the track is ON (IR7 - PB2)
+	   *  if the actuation limit switch is ON (Limit4 - PB14)
+	   * Then, we need to:
+	   *  Unlock the servo motor to drop the ride vehicle to the Drop to Queue ()
+	   * NOTES: when I say ON, I mean in their active position
+	   */
+	  if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_13) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_12) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_14) && HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2)){
+		  // Unlock Servo that holds in the ride vehicle
+		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2,GPIO_PIN_SET);
+		  // We only close the Servo once we complete the next step
+
+	//TODO: I2C communication to mapped servo.
+
+	  }
+	  osDelay(1);
+  }
+  /* USER CODE END StartDropTransition */
 }
 
 /**
